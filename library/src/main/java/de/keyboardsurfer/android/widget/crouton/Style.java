@@ -27,29 +27,6 @@ public class Style {
   
   public static final int NOT_SET = -1;
 
-  public static final int holoRedLight = 0xffff4444;
-  public static final int holoGreenLight = 0xff99cc00;
-  public static final int holoBlueLight = 0xff33b5e5;
-
-  /** Default style for alerting the user. */
-  public static final Style ALERT;
-  /** Default style for confirming an action. */
-  public static final Style CONFIRM;
-  /** Default style for general information. */
-  public static final Style INFO;
-
-  static {
-    ALERT = new Builder()
-      .setBackgroundColorValue(holoRedLight)
-      .build();
-    CONFIRM = new Builder()
-      .setBackgroundColorValue(holoGreenLight)
-      .build();
-    INFO = new Builder()
-      .setBackgroundColorValue(holoBlueLight)
-      .build();
-  }
-
   /**
    * The {@link Configuration} for this {@link Style}.
    * It can be overridden via {@link Crouton#setConfiguration(Configuration)}.
@@ -141,10 +118,16 @@ public class Style {
   final int textAppearanceResId;
 
   /** The padding for the crouton view content in pixels */
-  final int paddingInPixels;
+  final int verticalPaddingInPixels;
+
+  /** The padding for the crouton view content in pixels */
+  final int horizontalPaddingInPixels;
 
   /** The resource id for the padding for the view content */
-  final int paddingDimensionResId;
+  final int verticalPaddingDimensionResId;
+
+  /** The resource id for the padding for the view content */
+  final int horizontalPaddingDimensionResId;
 
   private Style(final Builder builder) {
     this.configuration = builder.configuration;
@@ -167,8 +150,10 @@ public class Style {
     this.textAppearanceResId = builder.textAppearanceResId;
     this.imageResId = builder.imageResId;
     this.imageScaleType = builder.imageScaleType;
-    this.paddingInPixels = builder.paddingInPixels;
-    this.paddingDimensionResId = builder.paddingDimensionResId;
+    this.verticalPaddingInPixels = builder.verticalPaddingInPixels;
+    this.horizontalPaddingInPixels = builder.horizontalPaddingInPixels;
+    this.verticalPaddingDimensionResId = builder.verticalPaddingDimensionResId;
+    this.horizontalPaddingDimensionResId = builder.horizontalPaddingDimensionResId;
     this.backgroundColorValue = builder.backgroundColorValue;
   }
 
@@ -195,13 +180,16 @@ public class Style {
     private int textAppearanceResId;
     private int imageResId;
     private ImageView.ScaleType imageScaleType;
-    private int paddingInPixels;
-    private int paddingDimensionResId;
+    private int verticalPaddingInPixels;
+    private int horizontalPaddingInPixels;
+    private int verticalPaddingDimensionResId;
+    private int horizontalPaddingDimensionResId;
 
     /** Creates a {@link Builder} to build a {@link Style} upon. */
     public Builder() {
       configuration = Configuration.DEFAULT;
-      paddingInPixels = 10;
+      verticalPaddingInPixels = 10;
+      horizontalPaddingInPixels = 16;
       backgroundColorResourceId = android.R.color.holo_blue_light;
       backgroundDrawableResourceId = 0;
       backgroundColorValue = NOT_SET;
@@ -244,8 +232,10 @@ public class Style {
       textAppearanceResId = baseStyle.textAppearanceResId;
       imageResId = baseStyle.imageResId;
       imageScaleType = baseStyle.imageScaleType;
-      paddingInPixels = baseStyle.paddingInPixels;
-      paddingDimensionResId = baseStyle.paddingDimensionResId;
+      verticalPaddingInPixels = baseStyle.verticalPaddingInPixels;
+      horizontalPaddingInPixels = baseStyle.horizontalPaddingInPixels;
+      verticalPaddingDimensionResId = baseStyle.verticalPaddingDimensionResId;
+      horizontalPaddingDimensionResId = baseStyle.horizontalPaddingDimensionResId;
     }
     /**
      * Set the {@link Configuration} option of the {@link Crouton}.
@@ -489,13 +479,39 @@ public class Style {
 
     /** The padding for the crouton view's content in pixels. */
     public Builder setPaddingInPixels(int padding) {
-      this.paddingInPixels = padding;
+      this.horizontalPaddingInPixels = padding;
+      this.verticalPaddingInPixels = padding;
+      return this;
+    }
+
+    /** The vertical padding for the crouton view's content in pixels. */
+    public Builder setVerticalPaddingInPixels(int padding) {
+      this.verticalPaddingInPixels = padding;
+      return this;
+    }
+
+    /** The lateral padding for the crouton view's content in pixels. */
+    public Builder setHorizontalPaddingInPixels(int padding) {
+      this.horizontalPaddingInPixels = padding;
       return this;
     }
 
     /** The resource id for the padding for the crouton view's content. */
-    public Builder setPaddingDimensionResId(int paddingResId) {
-      this.paddingDimensionResId = paddingResId;
+    public Builder setPaddingDimensionResId(int padding) {
+      this.horizontalPaddingDimensionResId = padding;
+      this.verticalPaddingDimensionResId = padding;
+      return this;
+    }
+
+    /** The resource id for the vertical padding for the crouton view's content. */
+    public Builder setVerticalPaddingDimensionResId(int paddingResId) {
+      this.verticalPaddingDimensionResId = paddingResId;
+      return this;
+    }
+
+    /** The resource id for the lateral padding for the crouton view's content. */
+    public Builder setHorizontalPaddingDimensionResId(int paddingResId) {
+      this.horizontalPaddingDimensionResId = paddingResId;
       return this;
     }
 
@@ -529,8 +545,10 @@ public class Style {
       ", textShadowDy=" + textShadowDy +
       ", textShadowDx=" + textShadowDx +
       ", textAppearanceResId=" + textAppearanceResId +
-      ", paddingInPixels=" + paddingInPixels +
-      ", paddingDimensionResId=" + paddingDimensionResId +
+      ", verticalPaddingInPixels=" + verticalPaddingInPixels +
+      ", horizontalPaddingInPixels=" + horizontalPaddingInPixels +
+      ", verticalPaddingDimensionResId=" + verticalPaddingDimensionResId +
+      ", horizontalPaddingDimensionResId=" + horizontalPaddingDimensionResId +
       '}';
   }
 }

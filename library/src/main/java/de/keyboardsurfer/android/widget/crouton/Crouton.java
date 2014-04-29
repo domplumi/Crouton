@@ -855,14 +855,18 @@ public final class Crouton {
         RelativeLayout.LayoutParams.MATCH_PARENT));
 
     // set padding
-    int padding = this.style.paddingInPixels;
+    int verticalPadding = this.style.verticalPaddingInPixels;
+    int horizontalPadding = this.style.horizontalPaddingInPixels;
 
     // if a padding dimension has been set, this will overwrite any padding
     // in pixels
-    if (this.style.paddingDimensionResId > 0) {
-      padding = resources.getDimensionPixelSize(this.style.paddingDimensionResId);
+    if (this.style.verticalPaddingDimensionResId > 0) {
+      verticalPadding = resources.getDimensionPixelSize(this.style.verticalPaddingDimensionResId);
     }
-    contentView.setPadding(padding, padding, padding, padding);
+    if (this.style.horizontalPaddingDimensionResId > 0) {
+      horizontalPadding = resources.getDimensionPixelSize(this.style.horizontalPaddingDimensionResId);
+    }
+    contentView.setPadding(horizontalPadding, verticalPadding, horizontalPadding, verticalPadding);
 
     // only setup image if one is requested
     ImageView image = null;

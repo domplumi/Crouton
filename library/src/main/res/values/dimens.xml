@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="crouton_horizontal_padding">10dp</dimen>
+    <dimen name="crouton_text_size">15sp</dimen>
+</resources>

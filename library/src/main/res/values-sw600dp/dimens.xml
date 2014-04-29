@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 7" tablets, 1.3x the sizes on a phone -->
+<resources>
+    <dimen name="crouton_horizontal_padding">13dp</dimen>
+    <dimen name="crouton_text_size">20sp</dimen>
+</resources>
